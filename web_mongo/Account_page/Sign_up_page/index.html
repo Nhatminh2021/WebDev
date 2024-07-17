@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning again</title>
+    <link rel="stylesheet" href="style.css"> <!-- remember MUST have to connect to css -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'> <!-- connect to the icon web -->
+</head>
+<body>
+    <div class="wrapper">
+        <form action="" id="sign-up-form">
+            <h1>Đăng ký</h1>
+            <div class="input-box">
+                <input id="full-name" type="text" placeholder="Họ và tên" required> 
+            </div>
+            <div class="input-box">
+                <input id="email-num-input" type="text" placeholder="Email hoặc số điện thoại" required> 
+            </div>
+            <div class="input-box">
+                <!-- create a box for input -->
+                <input id="account-name" type="text" placeholder="Tên tài khoản" required> 
+            </div>
+            <div class="input-box">
+                <input id="password" type="password" placeholder="Mật khẩu" required> 
+            </div>
+            <div class="input-box">
+                <input id="confirm-password" type="password" placeholder="Nhập lại mật khẩu" required> 
+            </div>
+
+            <div>
+                <div>Ngày sinh</div>
+                <div class="">
+                    <input id="birthday" type="date" required>
+                </div>
+            </div>
+
+            <div class="select">
+                <div
+                    class="selected"
+                    data-default="Giới tính"
+                    data-one="Nam"
+                    data-two="Nữ"
+                >
+                    <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    height="1em"
+                    viewBox="0 0 512 512"
+                    class="arrow"
+                    >
+                    <path
+                        d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"
+                    ></path>
+                    </svg>
+                </div>
+                <div class="options">
+                    <div title="all">
+                        <input id="all" name="gender" type="radio" value="" hidden checked />
+                        <label class="option" for="all" data-txt="Giới tính"></label>
+                    </div>
+                    <div title="option-1">
+                        <input id="male" name="gender" type="radio" value="Nam" />
+                        <label class="option" for="male" data-txt="Nam"></label>
+                    </div>
+                    <div title="option-2">
+                        <input id="female" name="gender" type="radio" value="Nữ" />
+                        <label class="option" for="female" data-txt="Nữ"></label>
+                    </div>
+                </div>
+            </div>
+            
+            <button type="submit" class="btn"> Đăng ký </button>
+        </form>
+
+        <div id="notification" class="notification hidden">
+            <p>Mật khẩu không đúng!</p>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traning web</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="custom.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="confirmation-msg" class="alert alert-success" role="alert"
+        style="display: none; position: fixed; top: 10px; right: 10px; z-index: 1000;">
+        Đăng nhập thành công
+    </div>
+
+    <div class="wrapper">
+        <div id="shrinking-header" class="header">
+            <div class="header-content">
+                <div class="store-representation">
+                    <i class='bx bxs-bowl-rice'></i>
+                    <span> Store </span>
+                </div>
+
+                <div class="nav-header1">
+                    <div id="account" class="nav-right-header">
+                        <!-- using this link indtead of the path cus we are creating a local server and will run on it -->
+                        <a href="http://localhost:4001/Account_page/Sign_in_page/">
+                            <button class="comic-button" style="padding: 0 22px; background: #B5C18E; border: none;">
+                                <i class='bx bxs-user-account'></i>
+                                <span>Tài khoản</span>
+                            </button>
+                        </a>
+                    </div>
+                    <div id="phone-num" class="nav-right-header">
+                        <a href="tel:+0000000000">
+                            <button class="comic-button" style="background-color: #FFA27F; border: none;">
+                                <i class='bx bxs-phone'></i>
+                                <span>000.000.0000</span>
+                            </button>
+                        </a>
+                    </div>
+                    <div id="basket" class="nav-right-header">
+                        <button class="comic-button side-panel-toggle" style="padding: 0 22px; background: #DEAC80; border: none;">
+                            <i class='bx bxs-cart'></i>
+                            <span>Giỏ hàng</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nav-main">
+                <div class="radio-inputs">
+                    <a href="#promotion" class="radio">
+                        <input type="radio" name="radio" checked="">
+                        <span class="name"> Nổi bật</span>
+                    </a>
+                    <a href="#vn-food" class="radio">
+                        <input type="radio" name="radio" checked="">
+                        <span class="name"> Đồ Việt</span>
+                    </a>
+                    <a href="#jp-food" class="radio">
+                        <input type="radio" name="radio" checked="">
+                        <span class="name"> Đồ Nhật</span>
+                    </a>
+                    <a href="#kr-food" class="radio">
+                        <input type="radio" name="radio" checked="">
+                        <span class="name"> Đồ Hàn</span>
+                    </a>
+                    <a href="#drinks" class="radio">
+                        <input type="radio" name="radio" checked="">
+                        <span class="name"> Nước uống</span>
+                    </a>
+                </div>
+
+                <form id="searchForm">
+                    <div class="group">
+                        <button id="search-btn">
+                            <svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
+                                <g>
+                                    <path
+                                        d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z">
+                                    </path>
+                                </g>
+                            </svg>
+                        </button>
+                        <input id="searchInput" class="input" type="search" placeholder="Tìm kiếm">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="extra-nav-components">
+            <div class="side-panel">
+                <div class="side-bar-close-btn">
+                    <h2 style="padding-top: 20px;">Giỏ hàng</h2>
+                    <button class="side-panel-close" style="background-color: red; color: #fff; border: none; margin-top: 10px;">Đóng</button>
+                </div>
+            
+                <div class="cart-content-border-top"></div>
+            
+                <div class="cart-content">
+                    Nội dung giỏ hàng
+                </div>
+            
+                <div class="cart-content-border-bottom"></div>
+            
+                <div class="total-till-now">
+                    <div class="total-till-now-left">
+                        <h4>Tổng tiền: </h4>
+                    </div>
+                    <div class="total-till-now-right">
+                        <p> 0 đ</p>
+                    </div>
+                </div>
+            
+                <div class="cart-footer">
+                    <div class="cart-add-more-btn">
+                        <button>+ Thêm món</button>
+                    </div>
+                    <div class="cart-check-out-btn">
+                        <button>Thanh toán</button>
+                    </div>
+                </div>
+            </div>
+            
+
+
+            <div class="chat-box">
+                <button class="open-chat-button comic-button" onclick="openForm()">
+                    <img src="messenger_5968771.png" alt="">
+                </button>
+
+                <div class="chat-popup" id="myForm">
+                    <form action="" class="form-container">
+                        <h3 style="padding-bottom: 10px;">Trò chuyện với chúng tôi</h3>
+
+                        <textarea id="send-agent-msg" placeholder="Nhập tin nhắn..." name="msg" required></textarea>
+
+                        <button type="submit" class="btn">Gửi</button>
+                        <button type="button" class="btn cancel" onclick="closeForm()">Đóng</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="top-page-btn">
+                <button onclick="topFunction()" id="go-top-btn" class="up-btn comic-button" title="Go to top"><img src="32213.png"
+                        alt=""></button>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="sub-content">
+                <div id="promotion" class="heading">
+                    <div class="line-before-heading"> a </div>
+                    <div class="heading-content promotion-with-icon">
+                        <h1> Nổi bật </h1>
+                    </div>
+                    <div class="line-after-heading"> a </div>
+                </div>
+
+                <section class="product">
+                    <button class="pre-btn"><img src="32213.png" alt=""></button>
+                    <button class="nxt-btn"><img src="32213.png" alt=""></button>
+                    <div class="product-container">
+                        <div class="food" data-id="0">
+                            <div class="food-img">
+                                <img src="Food_pics/Kr-food/download.jpeg" alt="">
+                            </div>
+                            <div class="food-interact">
+                                <div class="food-info"> Xiên bẩn</div>
+                                <div class="food-info"> 20.000đ</div>
+                                <div class="order">
+                                    <button class="comic-button btn-add-to-cart">Thêm vào giỏ</button>
+                                </div>
+                                <div class="order">
+                                    <button class="comic-button small-btn">Mua ngay</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="food" data-id="1">
+                            <div class="food-img">
+                                <img src="Food_pics/Kr-food/download.jpeg" alt="">
+                            </div>
+                            <div class="food-interact">
+                                <div class="food-info">Mỳ cay</div>
+                                <div class="food-info"> 20.000đ</div>
+                                <div class="order">
+                                    <button class="comic-button btn-add-to-cart">Thêm vào giỏ</button>
+                                </div>
+                                <div class="order">
+                                    <button class="comic-button small-btn">Mua ngay</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="food" data-id="1">
+                            <div class="food-img">
+                                <img src="Food_pics/Kr-food/download.jpeg" alt="">
+                            </div>
+                            <div class="food-interact">
+                                <div class="food-info">Mỳ cay</div>
+                                <div class="food-info"> 20.000đ</div>
+                                <div class="order">
+                                    <button class="comic-button btn-add-to-cart">Thêm vào giỏ</button>
+                                </div>
+                                <div class="order">
+                                    <button class="comic-button small-btn">Mua ngay</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="food" data-id="1">
+                            <div class="food-img">
+                                <img src="Food_pics/Kr-food/download.jpeg" alt="">
+                            </div>
+                            <div class="food-interact">
+                                <div class="food-info">Mỳ cay</div>
+                                <div class="food-info"> 20.000đ</div>
+                                <div class="order">
+                                    <button class="comic-button btn-add-to-cart">Thêm vào giỏ</button>
+                                </div>
+                                <div class="order">
+                                    <button class="comic-button small-btn">Mua ngay</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="food" data-id="1">
+                            <div class="food-img">
+                                <img src="Food_pics/Kr-food/download.jpeg" alt="">
+                            </div>
+                            <div class="food-interact">
+                                <div class="food-info">Mỳ cay</div>
+                                <div class="food-info"> 20.000đ</div>
+                                <div class="order">
+                                    <button class="comic-button btn-add-to-cart">Thêm vào giỏ</button>
+                                </div>
+                                <div class="order">
+                                    <button class="comic-button small-btn">Mua ngay</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="food" data-id="1">
+                            <div class="food-img">
+                                <img src="Food_pics/Kr-food/download.jpeg" alt="">
+                            </div>
+                            <div class="food-interact">
+                                <div class="food-info">Mỳ cay</div>
+                                <div class="food-info"> 20.000đ</div>
+                                <div class="order">
+                                    <button class="comic-button btn-add-to-cart">Thêm vào giỏ</button>
+                                </div>
+                                <div class="order">
+                                    <button class="comic-button small-btn">Mua ngay</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="see-all-list">
+                    <a style="--clr: #7808d0" class="button" href="#">
+                        <span class="button__icon-wrapper">
+                            <svg width="10" class="button__icon-svg" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 14 15">
+                                <path fill="currentColor"
+                                    d="M13.376 11.552l-.264-10.44-10.44-.24.024 2.28 6.96-.048L.2 12.56l1.488 1.488 9.432-9.432-.048 6.912 2.304.024z">
+                                </path>
+                            </svg>
+
+                            <svg class="button__icon-svg  button__icon-svg--copy" xmlns="http://www.w3.org/2000/svg"
+                                width="10" fill="none" viewBox="0 0 14 15">
+                                <path fill="currentColor"
+                                    d="M13.376 11.552l-.264-10.44-10.44-.24.024 2.28 6.96-.048L.2 12.56l1.488 1.488 9.432-9.432-.048 6.912 2.304.024z">
+                                </path>
+                            </svg>
+                        </span>
+                        Xem tất cả
+                    </a>
+                </div>
+            </div>
+
+            <div class="sub-content">
+                <div id="vn-food" class="heading">
+                    <div class="line-before-heading"> a </div>
+                    <div class="heading-content">
+                        <h1> Đồ Việt </h1>
+                    </div>
+                    <div class="line-after-heading"> a </div>
+                </div>
+
+                <section class="product">
+                    <button class="pre-btn"><img src="32213.png" alt=""></button>
+                    <button class="nxt-btn"><img src="32213.png" alt=""></button>
+                    <div class="product-container">
+                        <div class="food" data-id="1">
+                            <div class="food-img">
+                                <img src="Food_pics/Kr-food/download.jpeg" alt="">
+                            </div>
+                            <div class="food-interact">
+                                <div class="food-info">Mỳ cay</div>
+                                <div class="food-info"> 20.000đ</div>
+                                <div class="order">
+                                    <button class="comic-button btn-add-to-cart">Thêm vào giỏ</button>
+                                </div>
+                                <div class="order">
+                                    <button class="comic-button small-btn">Mua ngay</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="food" data-id="1">
+                            <div class="food-img">
+                                <img src="Food_pics/Kr-food/download.jpeg" alt="">
+                            </div>
+                            <div class="food-interact">
+                                <div class="food-info">Mỳ cay</div>
+                                <div class="food-info"> 20.000đ</div>
+                                <div class="order">
+                                    <button class="comic-button btn-add-to-cart">Thêm vào giỏ</button>
+                                </div>
+                                <div class="order">
+                                    <button class="comic-button small-btn">Mua ngay</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="food" data-id="1">
+                            <div class="food-img">
+                                <img src="Food_pics/Kr-food/download.jpeg" alt="">
+                            </div>
+                            <div class="food-interact">
+                                <div class="food-info">Mỳ cay</div>
+                                <div class="food-info"> 20.000đ</div>
+                                <div class="order">
+                                    <button class="comic-button btn-add-to-cart">Thêm vào giỏ</button>
+                                </div>
+                                <div class="order">
+                                    <button class="comic-button small-btn">Mua ngay</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="food" data-id="1">
+                            <div class="food-img">
+                                <img src="Food_pics/Kr-food/download.jpeg" alt="">
+                            </div>
+                            <div class="food-interact">
+                                <div class="food-info">Xiên bẩn</div>
+                                <div class="food-info"> 20.000đ</div>
+                                <div class="order">
+                                    <button class="comic-button btn-add-to-cart">Thêm vào giỏ</button>
+                                </div>
+                                <div class="order">
+                                    <button class="comic-button small-btn">Mua ngay</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="food" data-id="1">
+                            <div class="food-img">
+                                <img src="Food_pics/Kr-food/download.jpeg" alt="">
+                            </div>
+                            <div class="food-interact">
+                                <div class="food-info">Mỳ cay</div>
+                                <div class="food-info"> 20.000đ</div>
+                                <div class="order">
+                                    <button class="comic-button btn-add-to-cart">Thêm vào giỏ</button>
+                                </div>
+                                <div class="order">
+                                    <button class="comic-button small-btn">Mua ngay</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="food" data-id="1">
+                            <div class="food-img">
+                                <img src="Food_pics/Kr-food/download.jpeg" alt="">
+                            </div>
+                            <div class="food-interact">
+                                <div class="food-info">Mỳ cay</div>
+                                <div class="food-info"> 20.000đ</div>
+                                <div class="order">
+                                    <button class="comic-button btn-add-to-cart">Thêm vào giỏ</button>
+                                </div>
+                                <div class="order">
+                                    <button class="comic-button small-btn">Mua ngay</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="see-all-list">
+                    <a style="--clr: #7808d0" class="button" href="#">
+                        <span class="button__icon-wrapper">
+                            <svg width="10" class="button__icon-svg" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 14 15">
+                                <path fill="currentColor"
+                                    d="M13.376 11.552l-.264-10.44-10.44-.24.024 2.28 6.96-.048L.2 12.56l1.488 1.488 9.432-9.432-.048 6.912 2.304.024z">
+                                </path>
+                            </svg>
+
+                            <svg class="button__icon-svg  button__icon-svg--copy" xmlns="http://www.w3.org/2000/svg"
+                                width="10" fill="none" viewBox="0 0 14 15">
+                                <path fill="currentColor"
+                                    d="M13.376 11.552l-.264-10.44-10.44-.24.024 2.28 6.96-.048L.2 12.56l1.488 1.488 9.432-9.432-.048 6.912 2.304.024z">
+                                </path>
+                            </svg>
+                        </span>
+                        Xem tất cả
+                    </a>
+                </div>
+            </div>
+
+            <div class="sub-content">
+                <div id="jp-food" class="heading">
+                    <div class="line-before-heading"> a </div>
+                    <div class="heading-content promotion-with-icon">
+                        <h1> Đồ Nhật </h1>
+                    </div>
+                    <div class="line-after-heading"> a </div>
+                </div>
+
+                <section class="product">
+                    <button class="pre-btn"><img src="32213.png" alt=""></button>
+                    <button class="nxt-btn"><img src="32213.png" alt=""></button>
+                    <div class="product-container">
+                        <div class="food" data-id="1">
+                            <div class="food-img">
+                                <img src="Food_pics/Kr-food/download.jpeg" alt="">
+                            </div>
+                            <div class="food-interact">
+                                <div class="food-info">Mỳ cay</div>
+                                <div class="food-info"> 20.000đ</div>
+                                <div class="order">
+                                    <button class="comic-button btn-add-to-cart">Thêm vào giỏ</button>
+                                </div>
+                                <div class="order">
+                                    <button class="comic-button small-btn">Mua ngay</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="food" data-id="1">
+                            <div class="food-img">
+                                <img src="Food_pics/Kr-food/download.jpeg" alt="">
+                            </div>
+                            <div class="food-interact">
+                                <div class="food-info">Mỳ cay</div>
+                                <div class="food-info"> 20.000đ</div>
+                                <div class="order">
+                                    <button class="comic-button btn-add-to-cart">Thêm vào giỏ</button>
+                                </div>
+                                <div class="order">
+                                    <button class="comic-button small-btn">Mua ngay</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="food" data-id="1">
+                            <div class="food-img">
+                                <img src="Food_pics/Kr-food/download.jpeg" alt="">
+                            </div>
+                            <div class="food-interact">
+                                <div class="food-info">Mỳ cay</div>
+                                <div class="food-info"> 20.000đ</div>
+                                <div class="order">
+                                    <button class="comic-button btn-add-to-cart">Thêm vào giỏ</button>
+                                </div>
+                                <div class="order">
+                                    <button class="comic-button small-btn">Mua ngay</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="food" data-id="1">
+                            <div class="food-img">
+                                <img src="Food_pics/Kr-food/download.jpeg" alt="">
+                            </div>
+                            <div class="food-interact">
+                                <div class="food-info">Mỳ cay</div>
+                                <div class="food-info"> 20.000đ</div>
+                                <div class="order">
+                                    <button class="comic-button btn-add-to-cart">Thêm vào giỏ</button>
+                                </div>
+                                <div class="order">
+                                    <button class="comic-button small-btn">Mua ngay</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="food" data-id="1">
+                            <div class="food-img">
+                                <img src="Food_pics/Kr-food/download.jpeg" alt="">
+                            </div>
+                            <div class="food-interact">
+                                <div class="food-info">Mỳ cay</div>
+                                <div class="food-info"> 20.000đ</div>
+                                <div class="order">
+                                    <button class="comic-button btn-add-to-cart">Thêm vào giỏ</button>
+                                </div>
+                                <div class="order">
+                                    <button class="comic-button small-btn">Mua ngay</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="food" data-id="1">
+                            <div class="food-img">
+                                <img src="Food_pics/Kr-food/download.jpeg" alt="">
+                            </div>
+                            <div class="food-interact">
+                                <div class="food-info">Mỳ cay</div>
+                                <div class="food-info"> 20.000đ</div>
+                                <div class="order">
+                                    <button class="comic-button btn-add-to-cart">Thêm vào giỏ</button>
+                                </div>
+                                <div class="order">
+                                    <button class="comic-button small-btn">Mua ngay</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="see-all-list">
+                    <a style="--clr: #7808d0" class="button" href="#">
+                        <span class="button__icon-wrapper">
+                            <svg width="10" class="button__icon-svg" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 14 15">
+                                <path fill="currentColor"
+                                    d="M13.376 11.552l-.264-10.44-10.44-.24.024 2.28 6.96-.048L.2 12.56l1.488 1.488 9.432-9.432-.048 6.912 2.304.024z">
+                                </path>
+                            </svg>
+
+                            <svg class="button__icon-svg  button__icon-svg--copy" xmlns="http://www.w3.org/2000/svg"
+                                width="10" fill="none" viewBox="0 0 14 15">
+                                <path fill="currentColor"
+                                    d="M13.376 11.552l-.264-10.44-10.44-.24.024 2.28 6.96-.048L.2 12.56l1.488 1.488 9.432-9.432-.048 6.912 2.304.024z">
+                                </path>
+                            </svg>
+                        </span>
+                        Xem tất cả
+                    </a>
+                </div>
+            </div>
+
+            <div class="sub-content">
+                <div id="kr-food" class="heading">
+                    <div class="line-before-heading"> a </div>
+                    <div class="heading-content promotion-with-icon">
+                        <h1> Đồ Hàn </h1>
+                    </div>
+                    <div class="line-after-heading"> a </div>
+                </div>
+
+                <section class="product">
+                    <button class="pre-btn"><img src="32213.png" alt=""></button>
+                    <button class="nxt-btn"><img src="32213.png" alt=""></button>
+                    <div class="product-container">
+                        <div class="food" data-id="1">
+                            <div class="food-img">
+                                <img src="Food_pics/Kr-food/download.jpeg" alt="">
+                            </div>
+                            <div class="food-interact">
+                                <div class="food-info">Mỳ cay</div>
+                                <div class="food-info"> 20.000đ</div>
+                                <div class="order">
+                                    <button class="comic-button btn-add-to-cart">Thêm vào giỏ</button>
+                                </div>
+                                <div class="order">
+                                    <button class="comic-button small-btn">Mua ngay</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="food" data-id="1">
+                            <div class="food-img">
+                                <img src="Food_pics/Kr-food/download.jpeg" alt="">
+                            </div>
+                            <div class="food-interact">
+                                <div class="food-info">Mỳ cay</div>
+                                <div class="food-info"> 20.000đ</div>
+                                <div class="order">
+                                    <button class="comic-button btn-add-to-cart">Thêm vào giỏ</button>
+                                </div>
+                                <div class="order">
+                                    <button class="comic-button small-btn">Mua ngay</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="food" data-id="1">
+                            <div class="food-img">
+                                <img src="Food_pics/Kr-food/download.jpeg" alt="">
+                            </div>
+                            <div class="food-interact">
+                                <div class="food-info">Mỳ cay</div>
+                                <div class="food-info"> 20.000đ</div>
+                                <div class="order">
+                                    <button class="comic-button btn-add-to-cart">Thêm vào giỏ</button>
+                                </div>
+                                <div class="order">
+                                    <button class="comic-button small-btn">Mua ngay</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="food" data-id="1">
+                            <div class="food-img">
+                                <img src="Food_pics/Kr-food/download.jpeg" alt="">
+                            </div>
+                            <div class="food-interact">
+                                <div class="food-info">Mỳ cay</div>
+                                <div class="food-info"> 20.000đ</div>
+                                <div class="order">
+                                    <button class="comic-button btn-add-to-cart">Thêm vào giỏ</button>
+                                </div>
+                                <div class="order">
+                                    <button class="comic-button small-btn">Mua ngay</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="food" data-id="1">
+                            <div class="food-img">
+                                <img src="Food_pics/Kr-food/download.jpeg" alt="">
+                            </div>
+                            <div class="food-interact">
+                                <div class="food-info">Mỳ cay</div>
+                                <div class="food-info"> 20.000đ</div>
+                                <div class="order">
+                                    <button class="comic-button btn-add-to-cart">Thêm vào giỏ</button>
+                                </div>
+                                <div class="order">
+                                    <button class="comic-button small-btn">Mua ngay</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="food" data-id="1">
+                            <div class="food-img">
+                                <img src="Food_pics/Kr-food/download.jpeg" alt="">
+                            </div>
+                            <div class="food-interact">
+                                <div class="food-info">Mỳ cay</div>
+                                <div class="food-info"> 20.000đ</div>
+                                <div class="order">
+                                    <button class="comic-button btn-add-to-cart">Thêm vào giỏ</button>
+                                </div>
+                                <div class="order">
+                                    <button class="comic-button small-btn">Mua ngay</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="see-all-list">
+                    <a style="--clr: #7808d0" class="button" href="#">
+                        <span class="button__icon-wrapper">
+                            <svg width="10" class="button__icon-svg" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 14 15">
+                                <path fill="currentColor"
+                                    d="M13.376 11.552l-.264-10.44-10.44-.24.024 2.28 6.96-.048L.2 12.56l1.488 1.488 9.432-9.432-.048 6.912 2.304.024z">
+                                </path>
+                            </svg>
+
+                            <svg class="button__icon-svg  button__icon-svg--copy" xmlns="http://www.w3.org/2000/svg"
+                                width="10" fill="none" viewBox="0 0 14 15">
+                                <path fill="currentColor"
+                                    d="M13.376 11.552l-.264-10.44-10.44-.24.024 2.28 6.96-.048L.2 12.56l1.488 1.488 9.432-9.432-.048 6.912 2.304.024z">
+                                </path>
+                            </svg>
+                        </span>
+                        Xem tất cả
+                    </a>
+                </div>
+            </div>
+
+            <div class="sub-content">
+                <div id="drinks" class="heading">
+                    <div class="line-before-heading"> a </div>
+                    <div class="heading-content promotion-with-icon">
+                        <h1> Nước uống </h1>
+                    </div>
+                    <div class="line-after-heading"> a </div>
+                </div>
+
+                <section class="product">
+                    <button class="pre-btn"><img src="32213.png" alt=""></button>
+                    <button class="nxt-btn"><img src="32213.png" alt=""></button>
+                    <div class="product-container">
+                        <div class="food" data-id="2">
+                            <div class="food-img">
+                                <img src="Food_pics/Kr-food/download.jpeg" alt="">
+                            </div>
+                            <div class="food-interact">
+                                <div class="food-info">Trà đá</div>
+                                <div class="food-info"> 20.000đ</div>
+                                <div class="order">
+                                    <button class="comic-button btn-add-to-cart">Thêm vào giỏ</button>
+                                </div>
+                                <div class="order">
+                                    <button class="comic-button small-btn">Mua ngay</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="food" data-id="2">
+                            <div class="food-img">
+                                <img src="Food_pics/Kr-food/download.jpeg" alt="">
+                            </div>
+                            <div class="food-interact">
+                                <div class="food-info">Trà đá</div>
+                                <div class="food-info"> 20.000đ</div>
+                                <div class="order">
+                                    <button class="comic-button btn-add-to-cart">Thêm vào giỏ</button>
+                                </div>
+                                <div class="order">
+                                    <button class="comic-button small-btn">Mua ngay</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="food" data-id="2">
+                            <div class="food-img">
+                                <img src="Food_pics/Kr-food/download.jpeg" alt="">
+                            </div>
+                            <div class="food-interact">
+                                <div class="food-info">Trà đá</div>
+                                <div class="food-info"> 20.000đ</div>
+                                <div class="order">
+                                    <button class="comic-button btn-add-to-cart">Thêm vào giỏ</button>
+                                </div>
+                                <div class="order">
+                                    <button class="comic-button small-btn">Mua ngay</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="food" data-id="2">
+                            <div class="food-img">
+                                <img src="Food_pics/Kr-food/download.jpeg" alt="">
+                            </div>
+                            <div class="food-interact">
+                                <div class="food-info">Trà đá</div>
+                                <div class="food-info"> 20.000đ</div>
+                                <div class="order">
+                                    <button class="comic-button btn-add-to-cart">Thêm vào giỏ</button>
+                                </div>
+                                <div class="order">
+                                    <button class="comic-button small-btn">Mua ngay</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="food" data-id="2">
+                            <div class="food-img">
+                                <img src="Food_pics/Kr-food/download.jpeg" alt="">
+                            </div>
+                            <div class="food-interact">
+                                <div class="food-info">Trà đá</div>
+                                <div class="food-info"> 20.000đ</div>
+                                <div class="order">
+                                    <button class="comic-button btn-add-to-cart">Thêm vào giỏ</button>
+                                </div>
+                                <div class="order">
+                                    <button class="comic-button small-btn">Mua ngay</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="food" data-id="3">
+                            <div class="food-img">
+                                <img src="Food_pics/Kr-food/download.jpeg" alt="">
+                            </div>
+                            <div class="food-interact">
+                                <div class="food-info">Trà nhài</div>
+                                <div class="food-info"> 20.000đ</div>
+                                <div class="order">
+                                    <button class="comic-button btn-add-to-cart">Thêm vào giỏ</button>
+                                </div>
+                                <div class="order">
+                                    <button class="comic-button small-btn">Mua ngay</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <div class="see-all-list">
+                    <a style="--clr: #7808d0" class="button" href="#">
+                        <span class="button__icon-wrapper">
+                            <svg width="10" class="button__icon-svg" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 14 15">
+                                <path fill="currentColor"
+                                    d="M13.376 11.552l-.264-10.44-10.44-.24.024 2.28 6.96-.048L.2 12.56l1.488 1.488 9.432-9.432-.048 6.912 2.304.024z">
+                                </path>
+                            </svg>
+
+                            <svg class="button__icon-svg  button__icon-svg--copy" xmlns="http://www.w3.org/2000/svg"
+                                width="10" fill="none" viewBox="0 0 14 15">
+                                <path fill="currentColor"
+                                    d="M13.376 11.552l-.264-10.44-10.44-.24.024 2.28 6.96-.048L.2 12.56l1.488 1.488 9.432-9.432-.048 6.912 2.304.024z">
+                                </path>
+                            </svg>
+                        </span>
+                        Xem tất cả
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="footer-content">
+                <div class="store-representation">
+                    <div class="store-logo-img">
+                        <i class='bx bxs-bowl-rice'></i>
+                        <span> Store </span>
+                    </div>
+                    <div class="gov-certification">
+                        <a href="#" target="_self" class="">
+                            <img src="https://im.uniqlo.com/global-cms/spa/resfb28ee615b9469a533e195812bd0de44fr.png"
+                                alt="" width="160" class="mt-xxs">
+                        </a>
+                    </div>
+                </div>
+                <div class="store-logo">
+                    <div class="footer-sub-cotent">
+                        <h3> Về chúng tôi</h3>
+                    </div>
+                    <div class="store-info">
+                        <ul class="list-info-box">
+                            <li>
+                                <div class="type">
+                                    <span class="sub-type"> Số điện thoại:</span>
+                                    <span> 000.000.0000</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="type">
+                                    <span class="sub-type"> Email:</span>
+                                    <span>xyz@gmail.com</span>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="type" style="text-decoration: underline;">
+                                    <span class="sub-type"> Địa chỉ: </span>
+                                </div>
+                                <div class="text">
+                                    Cơ sở 1: abc, Cầu Giấy, Hà Nội <br>
+                                    Cơ sở 2: abc, Mỹ Đình, Hà Nội
+                                </div>
+                            </li>
+                            <li>
+                                <div class="hours">
+                                    <div id="operation-hours" class="type">
+                                        <span class="sub-type"> Giờ hoạt động: </span>
+                                    </div>
+                                    <div class="text">
+                                        <span> 8:00 - 22:00, hàng ngày </span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="info-box1">
+                    <div class="footer-sub-cotent">
+                        <h3> Chăm sóc khách hàng</h3>
+                    </div>
+                    <ul class="list-info-box1">
+                        <li>
+                            <a href=""> Hướng dẫn mua hàng</a>
+                        </li>
+                        <li>
+                            <a href=""> Hướng dẫn thanh toán</a>
+                        </li>
+                        <li>
+                            <a href="">Thời gian giao hàng</a>
+                        </li>
+                        <li>
+                            <a href="#"> Chính sách bảo mật </a>
+                        </li>
+                        <li>
+                            <a href="#"> Chính sách hoạt động </a>
+                        </li>
+                        <li>
+                            <a href="#"> Chứng nhận an toàn thực phẩm </a>
+                        </li>
+                        <li>
+                            <a href="">Hỏi đáp</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="info-box2">
+                    <div id="list-info-box2" class="footer-sub-cotent">
+                        <h3> Kết nối với chúng tôi</h3>
+                    </div>
+                    <ul class="list-info-box2">
+                        <li>
+                            <a href=""><i class='bx bxl-facebook-circle'></i></a>
+                            <a href=""><i class='bx bxl-instagram'></i></a>
+                            <a href=""><i class='bx bxl-youtube'></i></a>
+                            <a href=""><i class='bx bxl-tiktok'></i></a>
+                        </li>
+                        <li>
+                            <div class="text subscribe">
+                                <span>Theo dõi để cập nhật thông tin mới nhất về chúng tôi</span>
+                            </div>
+                            <div class="input-group subscribe">
+                                <form id="emailForm">
+                                    <input type="email" class="input-email" id="Email" name="Email" placeholder="Email">
+                                    <input id="email-follow-subscribe-btn" class="button--submit" value="Theo dõi"
+                                        type="submit">
+                                </form>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="text-rating subscribe">
+                                <h4> Đánh giá trải nghiệm của bạn </h4>
+                            </div>
+                            <div class="rating">
+                                <input type="radio" id="star-1" name="star-radio" value="star-1">
+                                <label for="star-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path pathLength="360"
+                                            d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z">
+                                        </path>
+                                    </svg>
+                                </label>
+                                <input type="radio" id="star-2" name="star-radio" value="star-1">
+                                <label for="star-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path pathLength="360"
+                                            d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z">
+                                        </path>
+                                    </svg>
+                                </label>
+                                <input type="radio" id="star-3" name="star-radio" value="star-1">
+                                <label for="star-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path pathLength="360"
+                                            d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z">
+                                        </path>
+                                    </svg>
+                                </label>
+                                <input type="radio" id="star-4" name="star-radio" value="star-1">
+                                <label for="star-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path pathLength="360"
+                                            d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z">
+                                        </path>
+                                    </svg>
+                                </label>
+                                <input type="radio" id="star-5" name="star-radio" value="star-1">
+                                <label for="star-5">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path pathLength="360"
+                                            d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z">
+                                        </path>
+                                    </svg>
+                                </label>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-copyright">
+                <h4>BẢN QUYỀN THUỘC CÔNG TY ABC. BẢO LƯU MỌI QUYỀN.</h>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Include Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Include your script.js -->
+    <script src="script.js"></script>
+</body>

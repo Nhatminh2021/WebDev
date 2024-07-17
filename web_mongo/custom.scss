@@ -1,0 +1,13 @@
+// Import Bootstrap functions and variables
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+
+// Override Bootstrap button border-radius variable
+$btn-border-radius: 40px;
+
+// Optionally override other Bootstrap variables as needed
+$btn-primary-bg: #007bff;
+$btn-secondary-bg: #6c757d;
+
+// Import Bootstrap with customized variables
+@import "node_modules/bootstrap/scss/bootstrap";
