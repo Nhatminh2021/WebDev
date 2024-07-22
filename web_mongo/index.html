@@ -28,14 +28,15 @@
 
                 <div class="nav-header1">
                     <div id="account" class="nav-right-header">
-                        <!-- using this link indtead of the path cus we are creating a local server and will run on it -->
-                        <a href="http://localhost:4001/Account_page/Sign_in_page/">
-                            <button class="comic-button" style="padding: 0 22px; background: #B5C18E; border: none;">
-                                <i class='bx bxs-user-account'></i>
-                                <span>Tài khoản</span>
-                            </button>
-                        </a>
+                        <button class="comic-button" id="account-button" style="padding: 0 22px; background: #B5C18E; border: none;">
+                            <i class='bx bxs-user-account'></i>
+                            Tài khoản
+                        </button>
+                        <div id="account-dropdown" class="dropdown-content" style="display: none;">
+                            <a href="#" id="logout">Log Out</a>
+                        </div>
                     </div>
+                    
                     <div id="phone-num" class="nav-right-header">
                         <a href="tel:+0000000000">
                             <button class="comic-button" style="background-color: #FFA27F; border: none;">

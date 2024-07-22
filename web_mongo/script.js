@@ -4,6 +4,10 @@ const utils = {
     getQueryParam: function(name) {
         const urlParams = new URLSearchParams(window.location.search);
         return urlParams.get(name);
+    },
+    // Function to check if login is successful
+    isLoggedIn: function() {
+        return this.getQueryParam('login') === 'success';
     }
 };
 
@@ -82,6 +86,7 @@ const slideshow = {
 // Shopping cart functionality module
 const cart = {
     cartItems: [],
+    totalAmount: 0, // Add a variable to keep track of the total amount
     // Function to add an item to the cart
     addToCart: function(item) {
         const existingItem = this.cartItems.find(cartItem => cartItem.id === item.id);
@@ -126,8 +131,8 @@ const cart = {
             input.addEventListener('change', this.handleQuantityChange.bind(this));
         });
 
-        const cartTotal = this.cartItems.reduce((total, item) => total + item.totalPrice, 0);
-        document.querySelector('.total-till-now-right p').textContent = `${cartTotal.toLocaleString()} đ`;
+        this.totalAmount = this.cartItems.reduce((total, item) => total + item.totalPrice, 0);
+        this.updateTotalAmount();
     },
     // Function to handle quantity decrease button click
     handleQuantityDecrease: function(event) {
@@ -158,14 +163,25 @@ const cart = {
             item.totalPrice = item.quantity * item.price;
             this.updateCart();
         }
+    },
+    // Function to update the total amount in the DOM
+    updateTotalAmount: function() {
+        const totalAmountElement = document.querySelector('.total-till-now-right p');
+        totalAmountElement.textContent = `${this.totalAmount.toLocaleString()} đ`;
     }
 };
+
+// Add event listener for "Thanh toán" button
+const checkoutButton = document.querySelector('.cart-check-out-btn button');
+eventHandlers.addClickListener(checkoutButton, function() {
+    alert(`Amount to pay: ${cart.totalAmount.toLocaleString()} đ`);
+});
 
 
 // Main application logic
 eventHandlers.addDOMContentLoadedListener(function() {
     // Check login success
-    if (utils.getQueryParam('login') === 'success') {
+    if (utils.isLoggedIn()) {
         const msgDiv = document.getElementById('confirmation-msg');
         domManipulation.toggleElementDisplay(msgDiv, 'block');
         setTimeout(() => {
@@ -301,14 +317,22 @@ eventHandlers.addDOMContentLoadedListener(function() {
         });
     });
 
+
     // For the cart toggle
-    eventHandlers.addClickListener(document.querySelector('.side-panel-toggle'), function() {
-        document.querySelector('.side-panel').classList.toggle('open');
+    const openCart = document.getElementById('basket');
+    const hiddenCart = document.querySelector('.hidden-cart-panel');
+    const closeCartButtons = document.querySelectorAll('.side-panel-close, .cart-add-more-btn');
+
+    eventHandlers.addClickListener(openCart, function() {
+        domManipulation.addClass(hiddenCart, 'open');
+    })
+    closeCartButtons.forEach(button => {
+        eventHandlers.addClickListener(button, function() {
+            domManipulation.removeClass(hiddenCart, 'open');
+        });
     });
 
-    eventHandlers.addClickListener(document.querySelector('.side-panel-close'), function() {
-        document.querySelector('.side-panel').classList.remove('open');
-    });
+
 
     // Chat functionality
     const openChatBtn = document.getElementById('chat-btn');
@@ -324,13 +348,35 @@ eventHandlers.addDOMContentLoadedListener(function() {
     });
 
 
-    const cartPanelBtn = document.querySelector('.side-panel-toggle');
-    const cartPanel = document.querySelector('.hidden-cart-panel');
-    const closeCartBtn = document.querySelector('.side-panel-close');
-    eventHandlers.addClickListener(cartPanelBtn, function() {
-        domManipulation.addClass(cartPanel, 'open');
+
+
+    // Account button click handling
+    const accountButton = document.getElementById('account-button');
+    const accountDropdown = document.getElementById('account-dropdown');
+
+    eventHandlers.addClickListener(accountButton, function() {
+        if (utils.isLoggedIn()) {
+            accountDropdown.style.display = accountDropdown.style.display === 'block' ? 'none' : 'block';
+        } else {
+            window.location.href = 'http://localhost:4001/Account_page/Sign_in_page/';
+        }
     });
-    eventHandlers.addClickListener(closeCartBtn, function() {
-        domManipulation.removeClass(cartPanel, 'open');
-    })
+
+    // Handle logout
+    eventHandlers.addClickListener(document.getElementById('logout'), function() {
+        window.location.href = 'http://localhost:4001';
+    });
+
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(event) {
+        if (!event.target.matches('#account-button')) {
+            const dropdowns = document.getElementsByClassName('dropdown-content');
+            for (let i = 0; i < dropdowns.length; i++) {
+                const openDropdown = dropdowns[i];
+                if (openDropdown.style.display === 'block') {
+                    openDropdown.style.display = 'none';
+                }
+            }
+        }
+    };
 });
