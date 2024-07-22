@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="custom.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -77,25 +77,30 @@
                     </a>
                 </div>
 
+                
+
                 <form id="searchForm">
                     <div class="group">
-                        <button id="search-btn">
-                            <svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
-                                <g>
-                                    <path
-                                        d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z">
-                                    </path>
-                                </g>
-                            </svg>
-                        </button>
-                        <input id="searchInput" class="input" type="search" placeholder="Tìm kiếm">
+                        <div class="input-wrapper">
+                            <input id="searchInput" class="input" type="search" placeholder="Tìm kiếm">
+                            <button id="search-btn" type="submit">
+                                <svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
+                                    <g>
+                                        <path
+                                            d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z">
+                                        </path>
+                                    </g>
+                                </svg>
+                            </button>
+                        </div>
                     </div>
                 </form>
+                
             </div>
         </div>
 
         <div class="extra-nav-components">
-            <div class="side-panel">
+            <div class="hidden-cart-panel">
                 <div class="side-bar-close-btn">
                     <h2 style="padding-top: 20px;">Giỏ hàng</h2>
                     <button class="side-panel-close" style="background-color: red; color: #fff; border: none; margin-top: 10px;">Đóng</button>
@@ -128,28 +133,25 @@
                 </div>
             </div>
             
-
-
             <div class="chat-box">
-                <button class="open-chat-button comic-button" onclick="openForm()">
+                <button id="chat-btn" class="open-chat-button comic-button">
                     <img src="messenger_5968771.png" alt="">
                 </button>
 
                 <div class="chat-popup" id="myForm">
                     <form action="" class="form-container">
                         <h3 style="padding-bottom: 10px;">Trò chuyện với chúng tôi</h3>
-
                         <textarea id="send-agent-msg" placeholder="Nhập tin nhắn..." name="msg" required></textarea>
-
-                        <button type="submit" class="btn">Gửi</button>
-                        <button type="button" class="btn cancel" onclick="closeForm()">Đóng</button>
+                        <button type="submit" class="btn bg-success text-white">Gửi</button>
+                        <button type="button" class="btn cancel bg-danger text-white">Đóng</button>
                     </form>
                 </div>
             </div>
 
-            <div class="top-page-btn">
-                <button onclick="topFunction()" id="go-top-btn" class="up-btn comic-button" title="Go to top"><img src="32213.png"
-                        alt=""></button>
+            <div>
+                <button id="go-top-btn" class="up-btn comic-button" title="Go to top">
+                    <img src="32213.png" alt="">
+                </button>
             </div>
         </div>
 
@@ -988,7 +990,7 @@
     <!-- Include Bootstrap JS and dependencies -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Include your script.js -->
     <script src="script.js"></script>
 </body>

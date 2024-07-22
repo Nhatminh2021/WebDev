@@ -85,7 +85,7 @@ button:active {
     padding: 20px;
     padding-bottom: 0;
     z-index: 1;
-    transition: all 0.3s ease;
+    transition: all 0.15s ease;
 }
 
 .header.shrink {
@@ -97,7 +97,7 @@ button:active {
     /* justify-content: space-evenly; */
     background: transparent;
     /* margin-left: 0 400px; */
-    transition: all 0.3s ease;
+    transition: all 0.1s ease;
 }
 
 .header-content .store-representation {
@@ -117,7 +117,7 @@ button:active {
 .nav-header1 .nav-right-header {
     padding: 0 20px;
     background: transparent;
-    transition: all 0.3s ease;
+    transition: all 0.1s ease;
 }
 
 #account,
@@ -130,11 +130,11 @@ button:active {
 }
 
 #account {
-    right: calc(5.3% + 10% + 10%);
+    right: 25.3%;
 }
 
 #phone-num {
-    right: calc(5.3% + 10%);
+    right: 15.3%;
 }
 
 #basket {
@@ -246,18 +246,35 @@ button:active {
     display: flex;
     line-height: 20px;
     padding: 0 4% 0 0;
-    margin-right: 18%;
+    /* margin-right: 10%; */
     align-items: center;
+    position: absolute;
+    top: 74.5%;
+    left: 77.3%;
+    width: 100%;
+}
+
+.input-wrapper {
     position: relative;
+    display: flex;
+    align-items: center;
 }
 
 #search-btn {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
     border: none;
-    position: fixed;
-    top: 10.8%;
-    right: 16.7%;
-    transition: all 0.3s ease;
-    z-index: 10;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 100%;
+    box-sizing: border-box;
 }
 
 #search-btn.shrink {
@@ -271,10 +288,9 @@ button:active {
 }
 
 #searchInput {
-    position: fixed;
-    right: 7.2%;
-    top: 13%;
-    max-width: 150px;
+    width: 100%;
+    padding-right: 40px; /* Adjust to make space for the button */
+    box-sizing: border-box;
 }
 
 .input {
@@ -303,18 +319,23 @@ button:active {
 }
 
 .icon {
-    position: absolute;
+    /* position: absolute;
     left: 1rem;
     fill: #777;
     width: 1rem;
     height: 1rem;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease; */
+
+    width: 24px;
+    height: 24px;
+    fill: #777;
 }
 
 .icon.shrink {
     width: 0.5rem;
     height: 0.5rem;
 }
+
 
 #shrinking-header.small {
     padding-bottom: 0;
@@ -372,21 +393,27 @@ button:active {
     font-size: 12px;
 }
 
+/* Styles when header is shrunk */
 #shrinking-header.small .group {
     margin-top: 7px;
 }
 
-#shrinking-header.small .group input {
+#shrinking-header.small .group .input-wrapper {
     position: fixed;
-    top: 8%;
+    top: 7.1%;
     right: 7.3%;
-    min-height: 20px;
     max-width: 150px;
 }
 
+#shrinking-header.small .group #searchInput {
+    min-height: 20px;
+    padding-right: 30px; /* Adjust to make space for the smaller button */
+}
+
 #shrinking-header.small #search-btn {
-    top: 5.2%;
-    right: 16.8%;
+    top: 50%; /* Vertically center the button */
+    right: 0;
+    transform: translateY(-50%);
     z-index: 10;
 }
 
@@ -450,14 +477,14 @@ button:active {
 
 /* Set a style for the submit/send button */
 .form-container .btn {
-    background-color: #04AA6D;
+    /* background-color: #04AA6D; */
     color: white;
     padding: 16px 20px;
     border: none;
     cursor: pointer;
     width: 100%;
     margin-bottom: 10px;
-    opacity: 0.8;
+    /* opacity: 0.8; */
 }
 
 /* Add a red background color to the cancel button */
@@ -471,9 +498,7 @@ button:active {
     opacity: 1;
 }
 
-
-
-.extra-nav-components .side-panel {
+.extra-nav-components .hidden-cart-panel {
     position: fixed;
     right: -300px;
     /* Adjust width accordingly */
@@ -489,23 +514,23 @@ button:active {
     /* Ensure it appears above other elements */
 }
 
-.side-panel .side-bar-close-btn {
+.hidden-cart-panel .side-bar-close-btn {
     display: flex;
     justify-content: space-around;
 }
 
-.side-panel.open {
+.hidden-cart-panel.open {
     right: 0;
 }
 
-.side-panel-toggle {
+.hidden-cart-panel-toggle {
     cursor: pointer;
     padding: 0 22px;
     background: #DEAC80;
     border: none;
 }
 
-.side-panel .cart-content-border-top {
+.hidden-cart-panel .cart-content-border-top {
     position: absolute;
     top: 8%;
     background: black;
@@ -513,14 +538,14 @@ button:active {
     width: 100%;
 }
 
-.side-panel .cart-content {
+.hidden-cart-panel .cart-content {
     position: absolute;
     top: 10%;
     max-height: 550px;
     overflow-y: auto;
 }
 
-.side-panel .cart-content-border-bottom {
+.hidden-cart-panel .cart-content-border-bottom {
     position: absolute;
     bottom: 19%;
     background: black;
@@ -528,7 +553,7 @@ button:active {
     width: 100%;
 }
 
-.side-panel .total-till-now {
+.hidden-cart-panel .total-till-now {
     display: flex;
     /* justify-content: space-around; */
     position: absolute;
@@ -544,7 +569,7 @@ button:active {
     margin-right: 50px;
 }
 
-.side-panel .cart-footer {
+.hidden-cart-panel .cart-footer {
     display: flex;
     /* justify-content: space-between; */
     position: fixed;
@@ -558,7 +583,7 @@ button:active {
 
 
 
-.extra-nav-components .top-page-btn #go-top-btn {
+#go-top-btn {
     display: none;
     position: fixed;
     bottom: 20px;
@@ -575,14 +600,14 @@ button:active {
     height: 50px;
 }
 
-.top-page-btn #go-top-btn img {
+#go-top-btn img {
     opacity: 0.8;
     width: 20px;
     height: 20px;
     transform: rotate(270deg);
 }
 
-.top-page-btn #go-top-btn:hover {
+#go-top-btn:hover {
     background-color: #D6DAC8;
 }
 
@@ -659,7 +684,7 @@ button:active {
 
 .food .food-img img {
     width: 100%;
-    height: 100%;
+    max-height: 200px;
 }
 
 .food .food-interact {
@@ -768,6 +793,9 @@ button:active {
 }
 
 .product-category {
+    display: flex;
+    overflow-x: auto;
+    scroll-behavior: smooth;
     padding: 0 10vw;
     font-size: 30px;
     font-weight: 500;
