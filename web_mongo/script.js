@@ -289,7 +289,20 @@ eventHandlers.addDOMContentLoadedListener(function() {
             top: middle,
             behavior: 'smooth'
         });
+
+        // Scroll horizontally if the element is in a scrollable container
+        const container = element.closest('.product-container');
+        if (container) {
+            const containerRect = container.getBoundingClientRect();
+            const elementLeft = elementRect.left + container.scrollLeft;
+            const scrollPosition = elementLeft - (containerRect.width / 2) + (elementRect.width / 2);
+            container.scrollTo({
+                left: scrollPosition,
+                behavior: 'smooth'
+            });
+        }
     }
+
     // Search for items
     eventHandlers.addFormSubmitListener(document.getElementById('searchForm'), function(event) {
         event.preventDefault();
@@ -301,9 +314,9 @@ eventHandlers.addDOMContentLoadedListener(function() {
             const foodName = item.querySelector('.food-info:first-child').textContent.toLowerCase();
             if (foodName.includes(query)) {
                 found = true;
-                item.style.backgroundColor = '#ffff99'; // Highlight the found item
+                item.style.color = 'red'; // Highlight the found item
                 setTimeout(() => {
-                    item.style.backgroundColor = '';
+                    item.style.color = '';
                 }, 2000);
                 scrollToElementInMiddle(item); // Scroll to the item and center it in the viewport
             }

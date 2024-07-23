@@ -130,7 +130,7 @@ button:active {
 }
 
 #account {
-    right: 25.3%;
+    right: 5.3%;
 }
 
 #phone-num {
@@ -138,7 +138,7 @@ button:active {
 }
 
 #basket {
-    right: 5.3%;
+    right: 25.3%;
 }
 
 
@@ -385,15 +385,15 @@ button:active {
 }
 
 #shrinking-header.small #account {
-    right: calc(6% + 10% + 10%);
+    right: 6%;
 }
 
 #shrinking-header.small #phone-num {
-    right: calc(6% + 10%);
+    right: 16%;
 }
 
 #shrinking-header.small #basket {
-    right: 6%;
+    right: 26%;
 }
 
 #shrinking-header.small .nav-right-header button {
