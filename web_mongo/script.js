@@ -278,6 +278,18 @@ eventHandlers.addDOMContentLoadedListener(function() {
         }
     });
 
+
+    // Function to center the item in the viewport
+    function scrollToElementInMiddle(element) {
+        const elementRect = element.getBoundingClientRect();
+        const absoluteElementTop = elementRect.top + window.pageYOffset;
+        const middle = absoluteElementTop - (window.innerHeight / 2) + (elementRect.height / 2);
+
+        window.scrollTo({
+            top: middle,
+            behavior: 'smooth'
+        });
+    }
     // Search for items
     eventHandlers.addFormSubmitListener(document.getElementById('searchForm'), function(event) {
         event.preventDefault();
@@ -286,14 +298,14 @@ eventHandlers.addDOMContentLoadedListener(function() {
         let found = false;
 
         items.forEach(function(item) {
-            const text = item.textContent.toLowerCase();
-            if (text.includes(query)) {
+            const foodName = item.querySelector('.food-info:first-child').textContent.toLowerCase();
+            if (foodName.includes(query)) {
                 found = true;
-                item.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                item.style.backgroundColor = '#ffff99';
+                item.style.backgroundColor = '#ffff99'; // Highlight the found item
                 setTimeout(() => {
                     item.style.backgroundColor = '';
                 }, 2000);
+                scrollToElementInMiddle(item); // Scroll to the item and center it in the viewport
             }
         });
 
@@ -301,6 +313,7 @@ eventHandlers.addDOMContentLoadedListener(function() {
             alert('Không có sản phẩm này');
         }
     });
+
 
     // Scroll effect on sub-content
     eventHandlers.addScrollListener(function() {

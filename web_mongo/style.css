@@ -220,7 +220,7 @@ button:active {
     border: none;
     padding: .5rem 0;
     color: rgba(51, 65, 85, 1);
-    transition: all 0.3s ease;
+    transition: all 0.1s ease;
 }
 
 .radio-inputs .radio .name.shrink {
